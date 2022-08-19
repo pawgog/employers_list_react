@@ -27,7 +27,7 @@ const useFetchingData = () => {
         fetchData();
     }, [apiUrl]);
 
-    return [{ data, isLoading, isError }];
+    return { data, isLoading, isError };
 };
 
 export default useFetchingData;
