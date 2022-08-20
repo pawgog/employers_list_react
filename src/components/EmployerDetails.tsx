@@ -1,4 +1,5 @@
 import { FC, Fragment } from 'react';
+import { Tooltip } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLinkedin, faGithub, faSquareTwitter } from '@fortawesome/free-brands-svg-icons';
 import {
@@ -30,11 +31,15 @@ const socialMediaBoard = (socialMedia: ISocialMedia) => {
         <Fragment key={socialMediaKey}>
             {socialMediaValues !== null ? (
                 <a href={socialMediaValues}>
-                    <FontAwesomeIcon icon={socialMediaIcon} size="2x" />
+                    <Tooltip title={socialMediaKey}>
+                        <FontAwesomeIcon icon={socialMediaIcon} size="2x" />
+                    </Tooltip>
                 </a>
             ) : (
                 <SocialMediaLinkStyled>
-                    <FontAwesomeIcon icon={socialMediaIcon} size="2x" />
+                    <Tooltip title={socialMediaKey}>
+                        <FontAwesomeIcon icon={socialMediaIcon} size="2x" />
+                    </Tooltip>
                 </SocialMediaLinkStyled>
             )}
         </Fragment>

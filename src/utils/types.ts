@@ -21,3 +21,8 @@ export interface ISocialMedia {
     gitHub?: string;
     twitter?: string;
 }
+
+export interface ISortByValues {
+    name?: string;
+    office?: string;
+}

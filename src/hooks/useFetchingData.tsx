@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { IEmployerObject } from '../utils/types';
 
-const useFetchingData = () => {
-    const apiUrl = 'https://api.1337co.de/v3/employees';
+const useFetchingData = (apiUrl: string) => {
     const [data, setData] = useState<Array<IEmployerObject>>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isError, setIsError] = useState<boolean>(false);
