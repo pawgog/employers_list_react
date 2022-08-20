@@ -28,3 +28,7 @@ export const SocialMediaBoardStyled = styled.div`
     justify-content: space-between;
     margin-top: 10px;
 `;
+
+export const SocialMediaLinkStyled = styled.div`
+    opacity: 0.2;
+`;

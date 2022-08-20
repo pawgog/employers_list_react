@@ -1,8 +1,13 @@
-import { FC } from 'react';
+import { FC, Fragment } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLinkedin, faGithub, faSquareTwitter } from '@fortawesome/free-brands-svg-icons';
-import { EmployerDetailsStyled, EmployerDetailsBoardStyled, SocialMediaBoardStyled } from './EmployerDetails.styled';
-import { IEmployerObject } from '../utils/types';
+import {
+    EmployerDetailsStyled,
+    EmployerDetailsBoardStyled,
+    SocialMediaBoardStyled,
+    SocialMediaLinkStyled,
+} from './EmployerDetails.styled';
+import { IEmployerObject, ISocialMedia } from '../utils/types';
 import { staticText } from '../utils/staticText';
 
 const defaultImg = 'https://via.placeholder.com/250';
@@ -11,8 +16,38 @@ interface IProps {
     data: IEmployerObject;
 }
 
+const socialMediaBoard = (socialMedia: ISocialMedia) => {
+    const socialMediaIconArray = {
+        linkedIn: faLinkedin,
+        gitHub: faGithub,
+        twitter: faSquareTwitter,
+    };
+    const socialMediaKey = Object.keys(socialMedia)[0];
+    const socialMediaValues = Object.values(socialMedia)[0];
+    const socialMediaIcon = socialMediaIconArray[socialMediaKey as keyof ISocialMedia];
+
+    return (
+        <Fragment key={socialMediaKey}>
+            {socialMediaValues !== null ? (
+                <a href={socialMediaValues}>
+                    <FontAwesomeIcon icon={socialMediaIcon} size="2x" />
+                </a>
+            ) : (
+                <SocialMediaLinkStyled>
+                    <FontAwesomeIcon icon={socialMediaIcon} size="2x" />
+                </SocialMediaLinkStyled>
+            )}
+        </Fragment>
+    );
+};
+
 const EmployerDetails: FC<IProps> = ({ data }) => {
     const { imagePortraitUrl, name, office, linkedIn, gitHub, twitter } = data;
+    const socialMediaArray = [
+        { linkedIn: linkedIn !== null ? `https://www.linkedin.com${linkedIn}` : linkedIn },
+        { gitHub: gitHub !== null ? `https://github.com/${gitHub}` : gitHub },
+        { twitter: twitter !== null ? `https://twitter.com/${twitter}` : twitter },
+    ];
 
     return (
         <EmployerDetailsStyled>
@@ -30,15 +65,7 @@ const EmployerDetails: FC<IProps> = ({ data }) => {
                     </p>
                 </div>
                 <SocialMediaBoardStyled>
-                    <a href={linkedIn}>
-                        <FontAwesomeIcon icon={faLinkedin} size="2x" />
-                    </a>
-                    <a href={gitHub}>
-                        <FontAwesomeIcon icon={faGithub} size="2x" />
-                    </a>
-                    <a href={twitter}>
-                        <FontAwesomeIcon icon={faSquareTwitter} size="2x" />
-                    </a>
+                    {socialMediaArray.map((socialMedia) => socialMediaBoard(socialMedia))}
                 </SocialMediaBoardStyled>
             </EmployerDetailsBoardStyled>
         </EmployerDetailsStyled>

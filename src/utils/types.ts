@@ -15,3 +15,9 @@ export interface IEmployerObject {
     stackOverflow: string;
     twitter: string;
 }
+
+export interface ISocialMedia {
+    linkedIn?: string;
+    gitHub?: string;
+    twitter?: string;
+}
