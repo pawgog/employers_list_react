@@ -1,5 +1,6 @@
 export const staticText = {
     pageTitle: 'The fellowship of the tretton37',
+    fontSize: 'Font size',
     sortFilterBy: 'Sort, filter by:',
     searchBy: 'Search by ',
     sortOrder: 'Sort order:',

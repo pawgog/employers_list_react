@@ -1,11 +1,13 @@
-import { FC, Fragment } from 'react';
+import { FC } from 'react';
 import { Tooltip } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLinkedin, faGithub, faSquareTwitter } from '@fortawesome/free-brands-svg-icons';
 import {
     EmployerDetailsStyled,
     EmployerDetailsBoardStyled,
+    EmployerDetailsTextStyled,
     SocialMediaBoardStyled,
+    SocialMediaStyled,
     SocialMediaLinkStyled,
 } from './EmployerDetails.styled';
 import { IEmployerObject, ISocialMedia } from '../utils/types';
@@ -28,21 +30,21 @@ const socialMediaBoard = (socialMedia: ISocialMedia) => {
     const socialMediaIcon = socialMediaIconArray[socialMediaKey as keyof ISocialMedia];
 
     return (
-        <Fragment key={socialMediaKey}>
+        <SocialMediaStyled key={socialMediaKey}>
             {socialMediaValues !== null ? (
                 <a href={socialMediaValues}>
                     <Tooltip title={socialMediaKey}>
-                        <FontAwesomeIcon icon={socialMediaIcon} size="2x" />
+                        <FontAwesomeIcon icon={socialMediaIcon} />
                     </Tooltip>
                 </a>
             ) : (
                 <SocialMediaLinkStyled>
                     <Tooltip title={socialMediaKey}>
-                        <FontAwesomeIcon icon={socialMediaIcon} size="2x" />
+                        <FontAwesomeIcon icon={socialMediaIcon} />
                     </Tooltip>
                 </SocialMediaLinkStyled>
             )}
-        </Fragment>
+        </SocialMediaStyled>
     );
 };
 
@@ -63,11 +65,15 @@ const EmployerDetails: FC<IProps> = ({ data }) => {
             )}
             <EmployerDetailsBoardStyled>
                 <div>
-                    <p>{name}</p>
-                    <p>
-                        {staticText.office}
-                        {office}
-                    </p>
+                    <EmployerDetailsTextStyled>
+                        <span>{name}</span>
+                    </EmployerDetailsTextStyled>
+                    <EmployerDetailsTextStyled>
+                        <span>
+                            {staticText.office}
+                            {office}
+                        </span>
+                    </EmployerDetailsTextStyled>
                 </div>
                 <SocialMediaBoardStyled>
                     {socialMediaArray.map((socialMedia) => socialMediaBoard(socialMedia))}

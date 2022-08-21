@@ -12,7 +12,7 @@ const useFetchingData = (apiUrl: string) => {
             setIsError(false);
             setIsLoading(true);
             try {
-                const result = await axios(apiUrl, {
+                const result = await axios.get(apiUrl, {
                     headers: {
                         Authorization: `api-key ${process.env.REACT_APP_KEY}`,
                     },

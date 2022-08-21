@@ -1,16 +1,20 @@
 import { useEffect, useState } from 'react';
-import { SelectChangeEvent } from '@mui/material';
+import { ThemeProvider, Button, SelectChangeEvent } from '@mui/material';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import useFetchingData from '../hooks/useFetchingData';
 import EmployerDetails from './EmployerDetails';
 import Toolbar from './Toolbar';
-import { DashboardStyled, EmployersBoardStyled } from './Dashboard.styled';
-import { sortEmployers } from '../utils/helpers';
-import { IEmployerObject, ISortByValues } from '../utils/types';
+import { theme, fontLarge, fontRegular } from '../utils/theme';
+import { DashboardStyled, DashboardTopBarStyled, EmployersBoardStyled, BoxStyled } from './Dashboard.styled';
+import { sortEmployers, filterEmployers } from '../utils/helpers';
+import { IEmployerObject } from '../utils/types';
 import { staticText } from '../utils/staticText';
 
 const apiUrl = 'https://api.1337co.de/v3/employees';
 
 const Dashboard = () => {
+    const [fontSize, setFontSize] = useState(true);
     const [filter, setFilterBy] = useState('');
     const [selectSortOrder, setSelectSortOrder] = useState('');
     const [selectSortFilterBy, setSelectSortFilterBy] = useState('');
@@ -25,11 +29,9 @@ const Dashboard = () => {
 
     const filterBy = (e: React.ChangeEvent<HTMLInputElement>) => {
         const filterValue = e.target.value;
-        const fileterEmployers = data.filter((employer) =>
-            employer[selectSortFilterBy as keyof ISortByValues].toLowerCase().includes(filterValue.toLowerCase()),
-        );
+        const filterEmployersResult = filterEmployers(data, selectSortFilterBy, filterValue);
         setFilterBy(filterValue);
-        setEmployers(fileterEmployers);
+        setEmployers(filterEmployersResult);
     };
 
     const handleChangeSelectBy = (e: SelectChangeEvent<string>) => {
@@ -46,23 +48,41 @@ const Dashboard = () => {
         setEmployers(sortEmployersData);
     };
 
+    const handleFontSize = () => setFontSize((prevState) => !prevState);
+
     return (
-        <DashboardStyled>
-            <h3>{staticText.pageTitle}</h3>
-            <Toolbar
-                filter={filter}
-                selectSortOrder={selectSortOrder}
-                selectSortFilterBy={selectSortFilterBy}
-                filterByFn={filterBy}
-                handleChangeSelectByFn={handleChangeSelectBy}
-                handleChangeSelectOrderFn={handleChangeSelectOrder}
-            />
-            <EmployersBoardStyled>
-                {employers.map((employerData: IEmployerObject) => (
-                    <EmployerDetails key={employerData.name} data={employerData} />
-                ))}
-            </EmployersBoardStyled>
-        </DashboardStyled>
+        <ThemeProvider theme={theme}>
+            <DashboardStyled style={fontSize ? fontRegular : fontLarge}>
+                <DashboardTopBarStyled>
+                    <h1>{staticText.pageTitle}</h1>
+                    <BoxStyled>
+                        <Button
+                            variant="outlined"
+                            color="info"
+                            startIcon={
+                                fontSize ? <FontAwesomeIcon icon={faPlus} /> : <FontAwesomeIcon icon={faMinus} />
+                            }
+                            onClick={handleFontSize}
+                        >
+                            {staticText.fontSize}
+                        </Button>
+                    </BoxStyled>
+                </DashboardTopBarStyled>
+                <Toolbar
+                    filter={filter}
+                    selectSortOrder={selectSortOrder}
+                    selectSortFilterBy={selectSortFilterBy}
+                    filterByFn={filterBy}
+                    handleChangeSelectByFn={handleChangeSelectBy}
+                    handleChangeSelectOrderFn={handleChangeSelectOrder}
+                />
+                <EmployersBoardStyled>
+                    {employers.map((employerData: IEmployerObject) => (
+                        <EmployerDetails key={employerData.name} data={employerData} />
+                    ))}
+                </EmployersBoardStyled>
+            </DashboardStyled>
+        </ThemeProvider>
     );
 };
 

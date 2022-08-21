@@ -12,3 +12,8 @@ export const sortEmployers = (data: Array<IEmployerObject>, selectSortFilterBy: 
               b[selectSortFilterBy as keyof ISortByValues].localeCompare(a[selectSortFilterBy as keyof ISortByValues]),
           );
 };
+
+export const filterEmployers = (data: Array<IEmployerObject>, selectSortFilterBy: string, filterValue: string) =>
+    data.filter((employer) =>
+        employer[selectSortFilterBy as keyof ISortByValues].toLowerCase().includes(filterValue.toLowerCase()),
+    );

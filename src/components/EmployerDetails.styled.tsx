@@ -19,14 +19,21 @@ export const EmployerDetailsBoardStyled = styled.div`
     grid-template-rows: 1fr;
     grid-gap: 1px 1px;
     gap: 1px 1px;
-    font-size: 11px;
     margin-top: 10px;
+`;
+
+export const EmployerDetailsTextStyled = styled.div`
+    margin: 10px 0;
 `;
 
 export const SocialMediaBoardStyled = styled.div`
     display: flex;
     justify-content: space-between;
-    margin-top: 10px;
+    margin-top: 8px;
+`;
+
+export const SocialMediaStyled = styled.div`
+    font-size: 1.6rem;
 `;
 
 export const SocialMediaLinkStyled = styled.div`
