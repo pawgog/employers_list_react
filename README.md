@@ -17,4 +17,4 @@ Project was covered with unit tests and typescript for avoiding potentially prob
 -   for build app `$ npm run build`
 -   for run testing `$ npm run test`
 
-Link: [Demo site]()
+Link: [Demo site](https://employers-list-app-8.netlify.app/)
