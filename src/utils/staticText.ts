@@ -1,6 +1,6 @@
 export const staticText = {
     pageTitle: 'The fellowship of the tretton37',
-    fontSize: 'Font size',
+    fontSize: 'Text size',
     sortFilterBy: 'Sort, filter by:',
     searchBy: 'Search by ',
     sortOrder: 'Sort order:',
@@ -9,4 +9,5 @@ export const staticText = {
     nameValue: 'Name',
     asc: 'Ascending',
     desc: 'Descending',
+    error: 'Something went wrong please try again later',
 };

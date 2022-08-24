@@ -23,6 +23,6 @@ export interface ISocialMedia {
 }
 
 export interface ISortByValues {
-    name?: string;
-    office?: string;
+    name?: string | null;
+    office?: string | null;
 }

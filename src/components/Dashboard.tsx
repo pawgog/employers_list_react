@@ -5,8 +5,11 @@ import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import useFetchingData from '../hooks/useFetchingData';
 import EmployerDetails from './EmployerDetails';
 import Toolbar from './Toolbar';
-import { theme, fontLarge, fontRegular } from '../utils/theme';
+import Spinner from '../globalStyle/Spinner';
+import Error from '../globalStyle/Error';
+import { theme, fontLarge, fontRegular } from '../globalStyle/theme';
 import { DashboardStyled, DashboardTopBarStyled, EmployersBoardStyled, BoxStyled } from './Dashboard.styled';
+import useAllImagesLoaded from '../hooks/useAllImagesLoaded';
 import { sortEmployers, filterEmployers } from '../utils/helpers';
 import { IEmployerObject } from '../utils/types';
 import { staticText } from '../utils/staticText';
@@ -20,12 +23,13 @@ const Dashboard = () => {
     const [selectSortFilterBy, setSelectSortFilterBy] = useState('');
     const [employers, setEmployers] = useState<Array<IEmployerObject>>([]);
     const { data, isLoading, isError } = useFetchingData(apiUrl);
-
-    console.log(data, isLoading, isError);
+    const { data: employersList } = useAllImagesLoaded(data, isLoading);
 
     useEffect(() => {
-        setEmployers(data);
-    }, [data]);
+        if (!isLoading) {
+            setEmployers(employersList);
+        }
+    }, [employersList, isLoading]);
 
     const filterBy = (e: React.ChangeEvent<HTMLInputElement>) => {
         const filterValue = e.target.value;
@@ -49,6 +53,13 @@ const Dashboard = () => {
     };
 
     const handleFontSize = () => setFontSize((prevState) => !prevState);
+
+    if (isError && !isLoading)
+        return (
+            <Error>
+                <h2>{staticText.error}</h2>
+            </Error>
+        );
 
     return (
         <ThemeProvider theme={theme}>
@@ -77,9 +88,13 @@ const Dashboard = () => {
                     handleChangeSelectOrderFn={handleChangeSelectOrder}
                 />
                 <EmployersBoardStyled>
-                    {employers.map((employerData: IEmployerObject) => (
-                        <EmployerDetails key={employerData.name} data={employerData} />
-                    ))}
+                    {isLoading ? (
+                        <Spinner />
+                    ) : (
+                        employers.map((employerData: IEmployerObject) => (
+                            <EmployerDetails key={employerData.name} data={employerData} />
+                        ))
+                    )}
                 </EmployersBoardStyled>
             </DashboardStyled>
         </ThemeProvider>

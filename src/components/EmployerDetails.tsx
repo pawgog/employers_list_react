@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { Tooltip } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLinkedin, faGithub, faSquareTwitter } from '@fortawesome/free-brands-svg-icons';
@@ -49,6 +49,7 @@ const socialMediaBoard = (socialMedia: ISocialMedia) => {
 };
 
 const EmployerDetails: FC<IProps> = ({ data }) => {
+    const [imageUrl, setImageUrl] = useState<string>('');
     const { imagePortraitUrl, name, office, linkedIn, gitHub, twitter } = data;
     const socialMediaArray = [
         { linkedIn: linkedIn !== null ? `https://www.linkedin.com${linkedIn}` : linkedIn },
@@ -56,13 +57,13 @@ const EmployerDetails: FC<IProps> = ({ data }) => {
         { twitter: twitter !== null ? `https://twitter.com/${twitter}` : twitter },
     ];
 
+    useEffect(() => {
+        setImageUrl(imagePortraitUrl);
+    }, [imagePortraitUrl]);
+
     return (
         <EmployerDetailsStyled>
-            {imagePortraitUrl !== null ? (
-                <img src={imagePortraitUrl} alt={name} />
-            ) : (
-                <img src={defaultImg} alt={name} />
-            )}
+            {imageUrl !== null ? <img src={imagePortraitUrl} alt={name} /> : <img src={defaultImg} alt={name} />}
             <EmployerDetailsBoardStyled>
                 <div>
                     <EmployerDetailsTextStyled>

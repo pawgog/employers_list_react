@@ -1,10 +1,23 @@
 import styled from 'styled-components';
+import device from '../globalStyle/devices';
+import { colors } from '../globalStyle/colors';
 
 export const EmployerDetailsStyled = styled.div`
-    width: 23%;
+    ${device.sm`
+        width: 100%;
+    `}
+    ${device.md`
+        width: 47%;
+    `}
+    ${device.lg`
+        width: 31%;
+    `}
+    ${device.xl`
+        width: 23%;
+    `}
     margin: 10px 5px;
     padding: 10px 5px;
-    background: #fff;
+    background: ${colors.white};
 
     & img {
         width: 100%;
