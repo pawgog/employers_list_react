@@ -17,9 +17,7 @@ export interface IEmployerObject {
 }
 
 export interface ISocialMedia {
-    linkedIn?: string;
-    gitHub?: string;
-    twitter?: string;
+    website: string;
 }
 
 export interface ISortByValues {

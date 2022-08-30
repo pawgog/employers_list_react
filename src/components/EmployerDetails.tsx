@@ -1,7 +1,7 @@
 import { FC, useState, useEffect } from 'react';
 import { Tooltip } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLinkedin, faGithub, faSquareTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faPager } from '@fortawesome/free-solid-svg-icons';
 import {
     EmployerDetailsStyled,
     EmployerDetailsBoardStyled,
@@ -20,27 +20,18 @@ interface IProps {
 }
 
 const socialMediaBoard = (socialMedia: ISocialMedia) => {
-    const socialMediaIconArray = {
-        linkedIn: faLinkedin,
-        gitHub: faGithub,
-        twitter: faSquareTwitter,
-    };
-    const socialMediaKey = Object.keys(socialMedia)[0];
-    const socialMediaValues = Object.values(socialMedia)[0];
-    const socialMediaIcon = socialMediaIconArray[socialMediaKey as keyof ISocialMedia];
-
     return (
-        <SocialMediaStyled key={socialMediaKey}>
-            {socialMediaValues !== null ? (
-                <a href={socialMediaValues}>
-                    <Tooltip title={socialMediaKey}>
-                        <FontAwesomeIcon icon={socialMediaIcon} />
+        <SocialMediaStyled key={Math.random()}>
+            {socialMedia ? (
+                <a href={socialMedia}>
+                    <Tooltip title="website">
+                        <FontAwesomeIcon icon={faPager} />
                     </Tooltip>
                 </a>
             ) : (
                 <SocialMediaLinkStyled>
-                    <Tooltip title={socialMediaKey}>
-                        <FontAwesomeIcon icon={socialMediaIcon} />
+                    <Tooltip title="website">
+                        <FontAwesomeIcon icon={faPager} />
                     </Tooltip>
                 </SocialMediaLinkStyled>
             )}
@@ -50,12 +41,7 @@ const socialMediaBoard = (socialMedia: ISocialMedia) => {
 
 const EmployerDetails: FC<IProps> = ({ data }) => {
     const [imageUrl, setImageUrl] = useState<string>('');
-    const { imagePortraitUrl, name, office, linkedIn, gitHub, twitter } = data;
-    const socialMediaArray = [
-        { linkedIn: linkedIn !== null ? `https://www.linkedin.com${linkedIn}` : linkedIn },
-        { gitHub: gitHub !== null ? `https://github.com/${gitHub}` : gitHub },
-        { twitter: twitter !== null ? `https://twitter.com/${twitter}` : twitter },
-    ];
+    const { imagePortraitUrl, name, address, website } = data;
 
     useEffect(() => {
         setImageUrl(imagePortraitUrl);
@@ -63,7 +49,7 @@ const EmployerDetails: FC<IProps> = ({ data }) => {
 
     return (
         <EmployerDetailsStyled>
-            {imageUrl !== null ? <img src={imagePortraitUrl} alt={name} /> : <img src={defaultImg} alt={name} />}
+            {imageUrl ? <img src={imagePortraitUrl} alt={name} /> : <img src={defaultImg} alt={name} />}
             <EmployerDetailsBoardStyled>
                 <div>
                     <EmployerDetailsTextStyled>
@@ -72,13 +58,11 @@ const EmployerDetails: FC<IProps> = ({ data }) => {
                     <EmployerDetailsTextStyled>
                         <span>
                             {staticText.office}
-                            {office}
+                            {address.city}
                         </span>
                     </EmployerDetailsTextStyled>
                 </div>
-                <SocialMediaBoardStyled>
-                    {socialMediaArray.map((socialMedia) => socialMediaBoard(socialMedia))}
-                </SocialMediaBoardStyled>
+                <SocialMediaBoardStyled>{socialMediaBoard(website)}</SocialMediaBoardStyled>
             </EmployerDetailsBoardStyled>
         </EmployerDetailsStyled>
     );

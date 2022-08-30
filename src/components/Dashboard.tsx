@@ -14,7 +14,7 @@ import { sortEmployers, filterEmployers } from '../utils/helpers';
 import { IEmployerObject } from '../utils/types';
 import { staticText } from '../utils/staticText';
 
-const apiUrl = 'https://api.1337co.de/v3/employees';
+const apiUrl = 'https://jsonplaceholder.typicode.com/users';
 
 const Dashboard = () => {
     const [fontSize, setFontSize] = useState(true);
