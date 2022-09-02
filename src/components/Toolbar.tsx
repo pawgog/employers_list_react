@@ -35,7 +35,7 @@ const Toolbar = ({
                 >
                     <option aria-label="None" value="" />
                     <option value="name">{staticText.nameValue}</option>
-                    <option value="office">{staticText.officeValue}</option>
+                    <option value="city">{staticText.officeValue}</option>
                 </Select>
             </FormControlStyled>
             <SelectFilterFadeAnimation $fade={selectSortFilterBy !== '' ? true : false}>

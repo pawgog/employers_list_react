@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { addCityObject } from '../utils/helpers';
 import { IEmployerObject } from '../utils/types';
 
 const useFetchingData = (apiUrl: string) => {
@@ -13,9 +14,8 @@ const useFetchingData = (apiUrl: string) => {
             setIsLoading(true);
             try {
                 const result = await axios.get(apiUrl);
-                console.log('result', result);
-
-                setData(result.data);
+                const employersListObject = addCityObject(result.data);
+                setData(employersListObject);
             } catch (error) {
                 setIsError(true);
             }

@@ -1,26 +1,34 @@
-export interface IEmployerObject {
-    email: string;
-    gitHub: string;
-    highlighted: boolean;
-    imagePortraitUrl: string;
-    imageWallOfLeetUrl: string;
-    linkedIn: string;
-    mainText: string;
-    manager: string;
-    name: string;
-    office: string;
-    orgUnit: string;
-    phoneNumber: string;
-    published: boolean;
-    stackOverflow: string;
-    twitter: string;
-}
+type IAddress = {
+    street: string;
+    suite: string;
+    city: string;
+    zipcode: string;
+    geo: {
+        lat: string;
+        lng: string;
+    };
+};
 
-export interface ISocialMedia {
+type ICompany = {
+    name: string;
+    catchPhrase: string;
+    bs: string;
+};
+
+export interface IEmployerObject {
+    address: IAddress;
+    company: ICompany;
+    email: string;
+    id: number;
+    imagePortraitUrl: string;
+    name: string;
+    phone: string;
+    username: string;
     website: string;
+    city: string;
 }
 
 export interface ISortByValues {
-    name?: string | null;
-    office?: string | null;
+    name: string;
+    city: string;
 }

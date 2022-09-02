@@ -10,7 +10,7 @@ import {
     SocialMediaStyled,
     SocialMediaLinkStyled,
 } from './EmployerDetails.styled';
-import { IEmployerObject, ISocialMedia } from '../utils/types';
+import { IEmployerObject } from '../utils/types';
 import { staticText } from '../utils/staticText';
 
 const defaultImg = 'https://via.placeholder.com/250';
@@ -19,7 +19,7 @@ interface IProps {
     data: IEmployerObject;
 }
 
-const socialMediaBoard = (socialMedia: ISocialMedia) => {
+const socialMediaBoard = (socialMedia: string) => {
     return (
         <SocialMediaStyled key={Math.random()}>
             {socialMedia ? (
@@ -41,7 +41,7 @@ const socialMediaBoard = (socialMedia: ISocialMedia) => {
 
 const EmployerDetails: FC<IProps> = ({ data }) => {
     const [imageUrl, setImageUrl] = useState<string>('');
-    const { imagePortraitUrl, name, address, website } = data;
+    const { imagePortraitUrl, name, city, website } = data;
 
     useEffect(() => {
         setImageUrl(imagePortraitUrl);
@@ -58,7 +58,7 @@ const EmployerDetails: FC<IProps> = ({ data }) => {
                     <EmployerDetailsTextStyled>
                         <span>
                             {staticText.office}
-                            {address.city}
+                            {city}
                         </span>
                     </EmployerDetailsTextStyled>
                 </div>
