@@ -14,8 +14,10 @@ const useFetchingData = (apiUrl: string) => {
             setIsLoading(true);
             try {
                 const result = await axios.get(apiUrl);
-                const employersListObject = addCityNameObject(result.data.results);
-                setData(employersListObject);
+                if (result.status === 200) {
+                    const employersListObject = addCityNameObject(result.data.results);
+                    setData(employersListObject);
+                }
             } catch (error) {
                 setIsError(true);
             }
