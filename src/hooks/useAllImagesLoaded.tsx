@@ -11,9 +11,9 @@ const useAllImagesLoaded = (data: Array<IEmployerObject>, isLoading: boolean) =>
         if (isLoading && arrayImagesLength > 0) return;
         [].forEach.call(arrayImages, (employer: IEmployerObject) => {
             const loadImg = new Image();
-            loadImg.src = employer.imagePortraitUrl;
+            loadImg.src = employer.picture.large;
             loadImg.onerror = () => {
-                employer.imagePortraitUrl = defaultImg;
+                employer.picture.large = defaultImg;
             };
         });
     }, [data]);

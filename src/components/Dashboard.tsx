@@ -14,7 +14,7 @@ import { sortEmployers, filterEmployers } from '../utils/helpers';
 import { IEmployerObject } from '../utils/types';
 import { staticText } from '../utils/staticText';
 
-const apiUrl = 'https://jsonplaceholder.typicode.com/users';
+const apiUrl = 'https://randomuser.me/api/?results=10';
 
 const Dashboard = () => {
     const [fontSize, setFontSize] = useState(true);
@@ -92,7 +92,7 @@ const Dashboard = () => {
                         <Spinner />
                     ) : (
                         employers.map((employerData: IEmployerObject) => (
-                            <EmployerDetails key={employerData.name} data={employerData} />
+                            <EmployerDetails key={employerData.nameAll} data={employerData} />
                         ))
                     )}
                 </EmployersBoardStyled>

@@ -25,7 +25,10 @@ export const filterEmployers = (data: Array<IEmployerObject>, selectSortFilterBy
         employer[selectSortFilterBy as keyof ISortByValues]?.toLowerCase().includes(filterValue.toLowerCase()),
     );
 
-export const addCityObject = (data: Array<IEmployerObject>) =>
+export const addCityNameObject = (data: Array<IEmployerObject>) =>
     data.map((employer) => {
-        return { ...employer, ...{ city: employer.address.city } };
+        return {
+            ...employer,
+            ...{ city: employer.location.city, nameAll: `${employer.name.first} ${employer.name.last}` },
+        };
     });

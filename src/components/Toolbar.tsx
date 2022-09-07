@@ -34,7 +34,7 @@ const Toolbar = ({
                     label={staticText.sortFilterBy}
                 >
                     <option aria-label="None" value="" />
-                    <option value="name">{staticText.nameValue}</option>
+                    <option value="nameAll">{staticText.nameValue}</option>
                     <option value="city">{staticText.officeValue}</option>
                 </Select>
             </FormControlStyled>

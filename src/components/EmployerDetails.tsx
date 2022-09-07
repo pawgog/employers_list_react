@@ -24,13 +24,13 @@ const socialMediaBoard = (socialMedia: string) => {
         <SocialMediaStyled key={Math.random()}>
             {socialMedia ? (
                 <a href={socialMedia}>
-                    <Tooltip title="website">
+                    <Tooltip title="email">
                         <FontAwesomeIcon icon={faPager} />
                     </Tooltip>
                 </a>
             ) : (
                 <SocialMediaLinkStyled>
-                    <Tooltip title="website">
+                    <Tooltip title="email">
                         <FontAwesomeIcon icon={faPager} />
                     </Tooltip>
                 </SocialMediaLinkStyled>
@@ -41,19 +41,19 @@ const socialMediaBoard = (socialMedia: string) => {
 
 const EmployerDetails: FC<IProps> = ({ data }) => {
     const [imageUrl, setImageUrl] = useState<string>('');
-    const { imagePortraitUrl, name, city, website } = data;
+    const { picture, nameAll, city, email } = data;
 
     useEffect(() => {
-        setImageUrl(imagePortraitUrl);
-    }, [imagePortraitUrl]);
+        setImageUrl(picture.large);
+    }, [picture]);
 
     return (
         <EmployerDetailsStyled>
-            {imageUrl ? <img src={imagePortraitUrl} alt={name} /> : <img src={defaultImg} alt={name} />}
+            {imageUrl ? <img src={picture.large} alt={nameAll} /> : <img src={defaultImg} alt={nameAll} />}
             <EmployerDetailsBoardStyled>
                 <div>
                     <EmployerDetailsTextStyled>
-                        <span>{name}</span>
+                        <span>{nameAll}</span>
                     </EmployerDetailsTextStyled>
                     <EmployerDetailsTextStyled>
                         <span>
@@ -62,7 +62,7 @@ const EmployerDetails: FC<IProps> = ({ data }) => {
                         </span>
                     </EmployerDetailsTextStyled>
                 </div>
-                <SocialMediaBoardStyled>{socialMediaBoard(website)}</SocialMediaBoardStyled>
+                <SocialMediaBoardStyled>{socialMediaBoard(email)}</SocialMediaBoardStyled>
             </EmployerDetailsBoardStyled>
         </EmployerDetailsStyled>
     );

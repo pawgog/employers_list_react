@@ -1,34 +1,63 @@
-type IAddress = {
-    street: string;
-    suite: string;
-    city: string;
-    zipcode: string;
-    geo: {
-        lat: string;
-        lng: string;
-    };
-};
-
-type ICompany = {
-    name: string;
-    catchPhrase: string;
-    bs: string;
-};
-
 export interface IEmployerObject {
-    address: IAddress;
-    company: ICompany;
+    gender: string;
+    name: {
+        title: string;
+        first: string;
+        last: string;
+    };
+    location: {
+        street: {
+            number: number;
+            name: string;
+        };
+        city: string;
+        state: string;
+        country: string;
+        postcode: string;
+        coordinates: {
+            latitude: string;
+            longitude: string;
+        };
+        timezone: {
+            offset: string;
+            description: string;
+        };
+    };
     email: string;
-    id: number;
-    imagePortraitUrl: string;
-    name: string;
+    login: {
+        uuid: string;
+        username: string;
+        password: string;
+        salt: string;
+        md5: string;
+        sha1: string;
+        sha256: string;
+    };
+    dob: {
+        date: string;
+        age: number;
+    };
+    registered: {
+        date: string;
+        age: number;
+    };
     phone: string;
-    username: string;
-    website: string;
+    cell: string;
+    id: {
+        name: string;
+        value: string;
+    };
+    picture: {
+        large: string;
+        medium: string;
+        thumbnail: string;
+    };
+    nat: string;
+    nameAll: string;
     city: string;
 }
 
 export interface ISortByValues {
-    name: string;
+    nameAll: string;
     city: string;
 }
