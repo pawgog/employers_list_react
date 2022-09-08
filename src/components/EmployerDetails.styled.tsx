@@ -39,16 +39,16 @@ export const EmployerDetailsTextStyled = styled.div`
     margin: 10px 0;
 `;
 
-export const SocialMediaBoardStyled = styled.div`
+export const MediaBoardStyled = styled.div`
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     margin-top: 8px;
 `;
 
-export const SocialMediaStyled = styled.div`
+export const MediaStyled = styled.div`
     font-size: 1.6rem;
 `;
 
-export const SocialMediaLinkStyled = styled.div`
+export const MediaLinkStyled = styled.div`
     opacity: 0.2;
 `;

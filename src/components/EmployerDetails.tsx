@@ -1,14 +1,14 @@
 import { FC, useState, useEffect } from 'react';
 import { Tooltip } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPager } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelopeOpenText, faSquarePhone } from '@fortawesome/free-solid-svg-icons';
 import {
     EmployerDetailsStyled,
     EmployerDetailsBoardStyled,
     EmployerDetailsTextStyled,
-    SocialMediaBoardStyled,
-    SocialMediaStyled,
-    SocialMediaLinkStyled,
+    MediaBoardStyled,
+    MediaStyled,
+    MediaLinkStyled,
 } from './EmployerDetails.styled';
 import { IEmployerObject } from '../utils/types';
 import { staticText } from '../utils/staticText';
@@ -19,29 +19,39 @@ interface IProps {
     data: IEmployerObject;
 }
 
-const socialMediaBoard = (socialMedia: string) => {
+interface IMedia {
+    email: string;
+    phone: string;
+}
+
+const mediaBoard = (media: IMedia, value: string) => {
+    const mediaValue = media[value as keyof IMedia];
+
     return (
-        <SocialMediaStyled key={Math.random()}>
-            {socialMedia ? (
-                <a href={socialMedia}>
-                    <Tooltip title="email">
-                        <FontAwesomeIcon icon={faPager} />
-                    </Tooltip>
-                </a>
+        <MediaStyled key={mediaValue}>
+            {mediaValue ? (
+                <Tooltip title={mediaValue}>
+                    <FontAwesomeIcon icon={value === 'email' ? faEnvelopeOpenText : faSquarePhone} />
+                </Tooltip>
             ) : (
-                <SocialMediaLinkStyled>
-                    <Tooltip title="email">
-                        <FontAwesomeIcon icon={faPager} />
+                <MediaLinkStyled>
+                    <Tooltip title={mediaValue}>
+                        <FontAwesomeIcon icon={value === 'email' ? faEnvelopeOpenText : faSquarePhone} />
                     </Tooltip>
-                </SocialMediaLinkStyled>
+                </MediaLinkStyled>
             )}
-        </SocialMediaStyled>
+        </MediaStyled>
     );
 };
 
 const EmployerDetails: FC<IProps> = ({ data }) => {
     const [imageUrl, setImageUrl] = useState<string>('');
-    const { picture, nameAll, city, email } = data;
+    const { picture, nameAll, city, email, phone } = data;
+
+    const media: IMedia = {
+        email,
+        phone,
+    };
 
     useEffect(() => {
         setImageUrl(picture.large);
@@ -62,7 +72,7 @@ const EmployerDetails: FC<IProps> = ({ data }) => {
                         </span>
                     </EmployerDetailsTextStyled>
                 </div>
-                <SocialMediaBoardStyled>{socialMediaBoard(email)}</SocialMediaBoardStyled>
+                <MediaBoardStyled>{Object.keys(media).map((value) => mediaBoard(media, value))}</MediaBoardStyled>
             </EmployerDetailsBoardStyled>
         </EmployerDetailsStyled>
     );
