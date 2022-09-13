@@ -35,13 +35,15 @@ const Toolbar = ({
                 >
                     <option aria-label="None" value="" />
                     <option value="nameAll">{staticText.nameValue}</option>
-                    <option value="city">{staticText.officeValue}</option>
+                    <option value="city">{staticText.cityValue}</option>
                 </Select>
             </FormControlStyled>
             <SelectFilterFadeAnimation $fade={selectSortFilterBy !== '' ? true : false}>
                 <TextField
                     id="searchBy"
-                    placeholder={`${staticText.searchBy}${selectSortFilterBy}:`}
+                    placeholder={`${staticText.searchBy}${
+                        selectSortFilterBy === 'nameAll' ? 'name' : selectSortFilterBy
+                    }:`}
                     type="search"
                     size="small"
                     variant="outlined"

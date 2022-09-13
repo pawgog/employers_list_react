@@ -531,7 +531,7 @@ const employersListAlphabeticalDesc = [
     },
 ];
 
-const employersListAlphabeticalOffice = [
+const employersListAlphabeticalCity = [
     {
         gender: 'female',
         name: {
@@ -769,7 +769,7 @@ const employersListByName = [
     },
 ];
 
-const employersListFilterByOffice = [
+const employersListFilterByCity = [
     {
         gender: 'female',
         name: {
@@ -896,13 +896,13 @@ describe('helper functions tests', () => {
         expect(employersListAlphabeticalDesc).toEqual(sortEmployers(dummyEmployersListArray, 'nameAll', 'desc'));
     });
     it('should sort employers in alphabetical order by city', async () => {
-        expect(employersListAlphabeticalOffice).toEqual(sortEmployers(dummyEmployersListArray, 'city', 'asc'));
+        expect(employersListAlphabeticalCity).toEqual(sortEmployers(dummyEmployersListArray, 'city', 'asc'));
     });
 
     it('should filter employers by name', async () => {
         expect(employersListByName).toEqual(filterEmployers(dummyEmployersListArray, 'nameAll', 'bek'));
     });
     it('should filter employers by city name', async () => {
-        expect(employersListFilterByOffice).toEqual(filterEmployers(dummyEmployersListArray, 'city', 'ma'));
+        expect(employersListFilterByCity).toEqual(filterEmployers(dummyEmployersListArray, 'city', 'ma'));
     });
 });

@@ -67,7 +67,7 @@ const EmployerDetails: FC<IProps> = ({ data }) => {
                     </EmployerDetailsTextStyled>
                     <EmployerDetailsTextStyled>
                         <span>
-                            {staticText.office}
+                            {staticText.city}
                             {city}
                         </span>
                     </EmployerDetailsTextStyled>
