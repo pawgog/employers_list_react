@@ -40,15 +40,8 @@ export const EmployerDetailsTextStyled = styled.div`
 `;
 
 export const MediaBoardStyled = styled.div`
+    position: relative;
     display: flex;
     justify-content: space-evenly;
-    margin-top: 8px;
-`;
-
-export const MediaStyled = styled.div`
-    font-size: 1.6rem;
-`;
-
-export const MediaLinkStyled = styled.div`
-    opacity: 0.2;
+    margin-top: 25px;
 `;

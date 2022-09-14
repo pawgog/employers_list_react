@@ -1,14 +1,10 @@
 import { FC, useState, useEffect } from 'react';
-import { Tooltip } from '@mui/material';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelopeOpenText, faSquarePhone } from '@fortawesome/free-solid-svg-icons';
+import MediaBoard from './MediaBoard';
 import {
     EmployerDetailsStyled,
     EmployerDetailsBoardStyled,
     EmployerDetailsTextStyled,
     MediaBoardStyled,
-    MediaStyled,
-    MediaLinkStyled,
 } from './EmployerDetails.styled';
 import { IEmployerObject } from '../utils/types';
 import { staticText } from '../utils/staticText';
@@ -23,26 +19,6 @@ interface IMedia {
     email: string;
     phone: string;
 }
-
-const mediaBoard = (media: IMedia, value: string) => {
-    const mediaValue = media[value as keyof IMedia];
-
-    return (
-        <MediaStyled key={mediaValue}>
-            {mediaValue ? (
-                <Tooltip title={mediaValue}>
-                    <FontAwesomeIcon icon={value === 'email' ? faEnvelopeOpenText : faSquarePhone} />
-                </Tooltip>
-            ) : (
-                <MediaLinkStyled>
-                    <Tooltip title={mediaValue}>
-                        <FontAwesomeIcon icon={value === 'email' ? faEnvelopeOpenText : faSquarePhone} />
-                    </Tooltip>
-                </MediaLinkStyled>
-            )}
-        </MediaStyled>
-    );
-};
 
 const EmployerDetails: FC<IProps> = ({ data }) => {
     const [imageUrl, setImageUrl] = useState<string>('');
@@ -72,7 +48,11 @@ const EmployerDetails: FC<IProps> = ({ data }) => {
                         </span>
                     </EmployerDetailsTextStyled>
                 </div>
-                <MediaBoardStyled>{Object.keys(media).map((value) => mediaBoard(media, value))}</MediaBoardStyled>
+                <MediaBoardStyled>
+                    {Object.keys(media).map((value) => (
+                        <MediaBoard key={value} media={media} value={value} />
+                    ))}
+                </MediaBoardStyled>
             </EmployerDetailsBoardStyled>
         </EmployerDetailsStyled>
     );
