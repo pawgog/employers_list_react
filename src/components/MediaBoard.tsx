@@ -1,18 +1,8 @@
 import React, { FC } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelopeOpenText, faSquarePhone, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { IMedia } from '../utils/types';
 import { MediaStyled, MediaValueStyled, MediaLinkStyled } from './MediaBoard.styled';
-
-interface IMedia {
-    email: {
-        mediaDetails: string;
-        isActive: boolean;
-    };
-    phone: {
-        mediaDetails: string;
-        isActive: boolean;
-    };
-}
 
 interface IProps {
     media: IMedia;

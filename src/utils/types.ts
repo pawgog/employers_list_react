@@ -61,3 +61,14 @@ export interface ISortByValues {
     nameAll: string;
     city: string;
 }
+
+export interface IMedia {
+    email: {
+        mediaDetails: string;
+        isActive: boolean;
+    };
+    phone: {
+        mediaDetails: string;
+        isActive: boolean;
+    };
+}

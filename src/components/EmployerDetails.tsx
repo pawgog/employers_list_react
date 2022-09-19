@@ -6,24 +6,13 @@ import {
     EmployerDetailsTextStyled,
     MediaBoardStyled,
 } from './EmployerDetails.styled';
-import { IEmployerObject } from '../utils/types';
+import { IEmployerObject, IMedia } from '../utils/types';
 import { staticText } from '../utils/staticText';
 
 const defaultImg = 'https://via.placeholder.com/250';
 
 interface IProps {
     data: IEmployerObject;
-}
-
-interface IMedia {
-    email: {
-        mediaDetails: string;
-        isActive: boolean;
-    };
-    phone: {
-        mediaDetails: string;
-        isActive: boolean;
-    };
 }
 
 const EmployerDetails: FC<IProps> = ({ data }) => {
