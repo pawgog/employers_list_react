@@ -1,21 +1,27 @@
-import { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelopeOpenText, faSquarePhone, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { MediaStyled, MediaValueStyled, MediaLinkStyled } from './MediaBoard.styled';
 
 interface IMedia {
-    email: string;
-    phone: string;
+    email: {
+        mediaDetails: string;
+        isActive: boolean;
+    };
+    phone: {
+        mediaDetails: string;
+        isActive: boolean;
+    };
 }
 
 interface IProps {
     media: IMedia;
     value: string;
+    handleIconFn: React.MouseEventHandler<SVGSVGElement> | undefined;
 }
 
-const MediaBoard: FC<IProps> = ({ media, value }) => {
-    const [iconActive, setIconActive] = useState(false);
-    const mediaValue = media[value as keyof IMedia];
+const MediaBoard: FC<IProps> = ({ media, value, handleIconFn }) => {
+    const { mediaDetails, isActive } = media[value as keyof IMedia];
     let mediaIcon = faXmark;
 
     switch (value) {
@@ -29,20 +35,16 @@ const MediaBoard: FC<IProps> = ({ media, value }) => {
             break;
     }
 
-    const handleIcon = () => {
-        setIconActive((prevVal) => !prevVal);
-    };
-
     return (
-        <MediaStyled key={mediaValue}>
-            {mediaValue ? (
+        <MediaStyled key={value}>
+            {mediaDetails ? (
                 <>
-                    <MediaValueStyled $iconActive={iconActive}>{mediaValue}</MediaValueStyled>
-                    <FontAwesomeIcon onClick={handleIcon} icon={mediaIcon} />
+                    <MediaValueStyled $iconActive={isActive}>{mediaDetails}</MediaValueStyled>
+                    <FontAwesomeIcon onClick={handleIconFn} icon={mediaIcon} />
                 </>
             ) : (
                 <MediaLinkStyled>
-                    <FontAwesomeIcon onClick={handleIcon} icon={mediaIcon} />
+                    <FontAwesomeIcon onClick={handleIconFn} icon={mediaIcon} />
                 </MediaLinkStyled>
             )}
         </MediaStyled>

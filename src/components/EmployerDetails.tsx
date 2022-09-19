@@ -16,8 +16,14 @@ interface IProps {
 }
 
 interface IMedia {
-    email: string;
-    phone: string;
+    email: {
+        mediaDetails: string;
+        isActive: boolean;
+    };
+    phone: {
+        mediaDetails: string;
+        isActive: boolean;
+    };
 }
 
 const EmployerDetails: FC<IProps> = ({ data }) => {
@@ -25,13 +31,40 @@ const EmployerDetails: FC<IProps> = ({ data }) => {
     const { picture, nameAll, city, email, phone } = data;
 
     const media: IMedia = {
-        email,
-        phone,
+        email: {
+            mediaDetails: email,
+            isActive: false,
+        },
+        phone: {
+            mediaDetails: phone,
+            isActive: false,
+        },
     };
+
+    const [mediaNew, setMedia] = useState(media);
+    const [valueDesc, setValueDesc] = useState('');
+    const [iconActive, setIconActive] = useState(false);
 
     useEffect(() => {
         setImageUrl(picture.large);
     }, [picture]);
+
+    const handleIcon = (iconValue: string) => {
+        setValueDesc(iconValue);
+
+        if (valueDesc === iconValue) {
+            media[iconValue as keyof IMedia].isActive = iconActive;
+            setIconActive((prevVal) => !prevVal);
+        } else {
+            Object.keys(media).forEach((val) => {
+                return val === iconValue
+                    ? (media[val as keyof IMedia].isActive = true)
+                    : (media[val as keyof IMedia].isActive = false);
+            });
+            setIconActive((prevVal) => !prevVal);
+        }
+        setMedia(media);
+    };
 
     return (
         <EmployerDetailsStyled>
@@ -50,7 +83,7 @@ const EmployerDetails: FC<IProps> = ({ data }) => {
                 </div>
                 <MediaBoardStyled>
                     {Object.keys(media).map((value) => (
-                        <MediaBoard key={value} media={media} value={value} />
+                        <MediaBoard key={value} media={mediaNew} value={value} handleIconFn={() => handleIcon(value)} />
                     ))}
                 </MediaBoardStyled>
             </EmployerDetailsBoardStyled>
