@@ -14,16 +14,17 @@ export const MediaValueStyled = styled.span<{ $iconActive: boolean }>`
     align-items: center;
     width: 100%;
     left: 0;
+    transition: all 0.3s;
 
     ${({ $iconActive }) =>
         $iconActive
             ? css`
-                  opacity: 1;
+                  transform: scale(1);
                   top: -25px;
               `
             : css`
-                  opacity: 0;
-                  top: 30px;
+                  transform: scale(0);
+                  top: 10px;
               `};
 `;
 
