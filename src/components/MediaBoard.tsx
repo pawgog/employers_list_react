@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import Tooltip from '@mui/material/Tooltip';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelopeOpenText, faSquarePhone, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { IMedia } from '../utils/types';
@@ -25,11 +26,19 @@ const MediaBoard: FC<IProps> = ({ media, value, handleIconFn }) => {
             break;
     }
 
+    const copyText = (text: string) => {
+        navigator.clipboard.writeText(text);
+    };
+
     return (
         <MediaStyled key={value}>
             {mediaDetails ? (
                 <>
-                    <MediaValueStyled $iconActive={isActive}>{mediaDetails}</MediaValueStyled>
+                    <Tooltip title="Copy text">
+                        <MediaValueStyled $iconActive={isActive} onClick={() => copyText(mediaDetails)}>
+                            {mediaDetails}
+                        </MediaValueStyled>
+                    </Tooltip>
                     <FontAwesomeIcon onClick={handleIconFn} icon={mediaIcon} />
                 </>
             ) : (
