@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelopeOpenText, faSquarePhone, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { IMedia } from '../utils/types';
 import { MediaStyled, MediaValueStyled, MediaLinkStyled } from './MediaBoard.styled';
+import { staticText } from '../utils/staticText';
 
 interface IProps {
     media: IMedia;
@@ -34,7 +35,7 @@ const MediaBoard: FC<IProps> = ({ media, value, handleIconFn }) => {
         <MediaStyled key={value}>
             {mediaDetails ? (
                 <>
-                    <Tooltip title="Copy text">
+                    <Tooltip title={staticText.copyText} followCursor={true} placement="top">
                         <MediaValueStyled $iconActive={isActive} onClick={() => copyText(mediaDetails)}>
                             {mediaDetails}
                         </MediaValueStyled>

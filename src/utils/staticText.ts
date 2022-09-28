@@ -4,6 +4,7 @@ export const staticText = {
     sortFilterBy: 'Sort, filter by:',
     searchBy: 'Search by ',
     sortOrder: 'Sort order:',
+    copyText: 'Copy text',
     city: 'City: ',
     cityValue: 'City',
     nameValue: 'Name',
