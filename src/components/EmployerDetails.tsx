@@ -1,4 +1,7 @@
 import { FC, useState, useEffect } from 'react';
+import { useSpeechSynthesis } from 'react-speech-kit';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faVolumeHigh } from '@fortawesome/free-solid-svg-icons';
 import MediaBoard from './MediaBoard';
 import {
     EmployerDetailsStyled,
@@ -17,6 +20,7 @@ interface IProps {
 
 const EmployerDetails: FC<IProps> = ({ data }) => {
     const [imageUrl, setImageUrl] = useState<string>('');
+    const { speak } = useSpeechSynthesis();
     const { picture, nameAll, city, email, phone } = data;
 
     const media: IMedia = {
@@ -55,6 +59,11 @@ const EmployerDetails: FC<IProps> = ({ data }) => {
         setMedia(media);
     };
 
+    const speakElement = (...props: Array<string>) => {
+        const message = [...props].join(', ');
+        speak({ text: message });
+    };
+
     return (
         <EmployerDetailsStyled>
             {imageUrl ? <img src={picture.large} alt={nameAll} /> : <img src={defaultImg} alt={nameAll} />}
@@ -69,6 +78,9 @@ const EmployerDetails: FC<IProps> = ({ data }) => {
                             {city}
                         </span>
                     </EmployerDetailsTextStyled>
+                    <button onClick={() => speakElement(nameAll, city)}>
+                        <FontAwesomeIcon icon={faVolumeHigh} />
+                    </button>
                 </div>
                 <MediaBoardStyled>
                     {Object.keys(media).map((value) => (
