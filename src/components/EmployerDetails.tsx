@@ -6,6 +6,7 @@ import MediaBoard from './MediaBoard';
 import {
     EmployerDetailsStyled,
     EmployerDetailsBoardStyled,
+    EmployerDetailsButtonStyled,
     EmployerDetailsTextStyled,
     MediaBoardStyled,
 } from './EmployerDetails.styled';
@@ -36,7 +37,7 @@ const EmployerDetails: FC<IProps> = ({ data }) => {
 
     const [mediaNew, setMedia] = useState(media);
     const [valueDesc, setValueDesc] = useState('');
-    const [iconActive, setIconActive] = useState(false);
+    const [iconActive, setIconActive] = useState(true);
 
     useEffect(() => {
         setImageUrl(picture.large);
@@ -78,9 +79,9 @@ const EmployerDetails: FC<IProps> = ({ data }) => {
                             {city}
                         </span>
                     </EmployerDetailsTextStyled>
-                    <button onClick={() => speakElement(nameAll, city)}>
+                    <EmployerDetailsButtonStyled onClick={() => speakElement(nameAll, city)}>
                         <FontAwesomeIcon icon={faVolumeHigh} />
-                    </button>
+                    </EmployerDetailsButtonStyled>
                 </div>
                 <MediaBoardStyled>
                     {Object.keys(media).map((value) => (

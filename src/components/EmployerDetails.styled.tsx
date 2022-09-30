@@ -39,6 +39,17 @@ export const EmployerDetailsTextStyled = styled.div`
     margin: 10px 0;
 `;
 
+export const EmployerDetailsButtonStyled = styled.button`
+    background-color: ${colors.grey};
+    border: none;
+    border-radius: 15px;
+    color: ${colors.white};
+    padding: 5px 8px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+`;
+
 export const MediaBoardStyled = styled.div`
     position: relative;
     display: flex;
